@@ -10,20 +10,23 @@ let buttonConfirm = null;
 
 // Callback function to execute when mutations are observed
 const callback = (mutationList, observer) => {
-
-  if (!buttonConfirm) {
-    buttonConfirm = document.querySelector("#confirm-button > yt-button-shape > button > yt-touch-feedback-shape");
-    observer.disconnect();
-  }
-  
-  // for (const mutation of mutationList) {
-  if (buttonConfirm) {
-      buttonConfirm.click();
-      observer.observe(buttonConfirm, { attributes: true });
-      console.log('continue', count);
-      count += 1;
-  }
-  // }
+  console.log('mutation', mutationList)
+  setTimeout(() => {
+    if (!buttonConfirm) {
+      buttonConfirm = document.querySelector("#confirm-button > yt-button-shape > button > yt-touch-feedback-shape");
+      console.log('buttonConfirm', buttonConfirm);
+      observer.disconnect();
+    }
+    
+    // for (const mutation of mutationList) {
+    if (buttonConfirm) {
+        buttonConfirm.click();
+        observer.observe(buttonConfirm, { attributes: true });
+        console.log('continue', count);
+        count += 1;
+    }
+    // }
+  }, 500)
 };
 
 // Create an observer instance linked to the callback function
