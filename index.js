@@ -6,17 +6,23 @@ const config = { childList: true };
 
 let count = 0;
 
+let buttonConfirm = null;
+
 // Callback function to execute when mutations are observed
 const callback = (mutationList, observer) => {
-  const buttonConfirm = document.querySelector("#confirm-button > yt-button-shape > button > yt-touch-feedback-shape");
+
+  if (!buttonConfirm) {
+    buttonConfirm = document.querySelector("#confirm-button > yt-button-shape > button > yt-touch-feedback-shape");
+    observer.disconnect();
+  }
+  
   // for (const mutation of mutationList) {
-      if (buttonConfirm) {
-          buttonConfirm.click();
-          observer.disconnect();
-          observer.observe(buttonConfirm, { attributes: true });
-          console.log('continue', count);
-          count += 1;
-      }
+  if (buttonConfirm) {
+      buttonConfirm.click();
+      observer.observe(buttonConfirm, { attributes: true });
+      console.log('continue', count);
+      count += 1;
+  }
   // }
 };
 
