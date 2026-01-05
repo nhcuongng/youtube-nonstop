@@ -17,13 +17,13 @@ const callback = (mutationList, observer) => {
     if (buttonConfirm) {
         buttonConfirm.click();
         clearInterval(intervalTimer);
-        observer.disconnect();
-        observerButtonAutoClick.observe(buttonConfirm, { attributes: true });
+        observerButtonAutoClick.observe(buttonConfirm, { attributes: true, childList: true });
         console.log('continue', count);
         count += 1;
+        observer.disconnect();
     }
     // }
-  }, 200)
+  }, 500)
 };
 
 // Create an observer instance linked to the callback function
