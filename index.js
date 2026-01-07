@@ -16,11 +16,11 @@ const callback = (mutationList, observer) => {
     // for (const mutation of mutationList) {
     if (buttonConfirm) {
         buttonConfirm.click();
-        clearInterval(intervalTimer);
         observerButtonAutoClick.observe(buttonConfirm, { attributes: true, childList: true });
         console.log('continue', count);
         count += 1;
         observer.disconnect();
+        clearInterval(intervalTimer);
     }
     // }
   }, 500)
