@@ -1,29 +1,23 @@
-let intervalTimer = null;
-
 let count = 0;
 
 let buttonConfirm = null;
 
+const config =  { attributes: true, childList: true };
+
 // Callback function to execute when mutations are observed
 const callback = (mutationList, observer) => {
   console.log('mutation', mutationList)
-  intervalTimer = setInterval(() => {
-    if (!buttonConfirm) {
-      buttonConfirm = document.querySelector("#confirm-button > yt-button-shape > button > yt-touch-feedback-shape");
-      console.log('buttonConfirm', buttonConfirm);
-    }
-    
-    // for (const mutation of mutationList) {
-    if (buttonConfirm) {
-        buttonConfirm.click();
-        observerButtonAutoClick.observe(buttonConfirm, { attributes: true, childList: true });
-        console.log('continue', count);
-        count += 1;
-        observer.disconnect();
-        clearInterval(intervalTimer);
-    }
-    // }
-  }, 500)
+  if (!buttonConfirm) {
+    buttonConfirm = document.querySelector("#confirm-button > yt-button-shape > button > yt-touch-feedback-shape");
+    console.log('buttonConfirm', buttonConfirm);
+  }
+  
+  if (buttonConfirm) {
+      buttonConfirm.click();
+      console.log('continue', count);
+      count += 1;
+      observer.disconnect();
+  }
 };
 
 // Create an observer instance linked to the callback function
@@ -32,13 +26,5 @@ const observer = new MutationObserver(callback);
 // Start observing the target node for configured mutations
 observer.observe(
   document.getElementsByTagName("ytd-popup-container")[0],
-  { childList: true }
+  config,
 );
-
-const buttonAutoClick = () => {
-  buttonConfirm.click();
-  console.log('button auto click');
-}
-
-const observerButtonAutoClick = new MutationObserver(buttonAutoClick);
-
