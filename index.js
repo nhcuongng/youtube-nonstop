@@ -2,11 +2,11 @@ let count = 0;
 
 let buttonConfirm = null;
 
+let timer = null;
+
 const config =  { attributes: true, childList: true };
 
-// Callback function to execute when mutations are observed
-const callback = (mutationList, observer) => {
-  console.log('mutation', mutationList)
+const handleCheckButton = () => {
   if (!buttonConfirm) {
     buttonConfirm = document.querySelector("#confirm-button > yt-button-shape > button > yt-touch-feedback-shape");
     console.log('buttonConfirm', buttonConfirm);
@@ -18,6 +18,11 @@ const callback = (mutationList, observer) => {
       count += 1;
       observer.disconnect();
   }
+}
+
+// Callback function to execute when mutations are observed
+const callback = (mutationList, observer) => {
+  timer = setTimeout(handlePressButton, 500);
 };
 
 // Create an observer instance linked to the callback function
