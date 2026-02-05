@@ -6,7 +6,7 @@ let timer = null;
 
 const config =  { attributes: true, childList: true };
 
-const handleCheckButton = () => {
+const handlePressButton = () => {
   if (!buttonConfirm) {
     buttonConfirm = document.querySelector("#confirm-button > yt-button-shape > button > yt-touch-feedback-shape");
     console.log('buttonConfirm', buttonConfirm);
